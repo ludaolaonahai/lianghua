@@ -1,0 +1,3 @@
+fsdbDumpvars
+run
+exit
