@@ -22,7 +22,26 @@ function new(string name="");
 super.new(name);
 endfunction
 task body();
-`uvm_do_with(req,{req.sel==1;req.wr==1;req.addr==8'h23;})
+`uvm_do_with(req,{req.sel==1;req.wr==1;req.addr==8'h23;req.data==8'h1;})
 endtask
 endclass
 
+class test_seq_01 extends test_seq;
+`uvm_object_utils(test_seq_01)
+function new(string name="");
+super.new(name);
+endfunction
+task body();
+`uvm_do_with(req,{req.sel==1;req.wr==1;req.addr==8'h23;req.data==8'h2;})
+endtask
+endclass
+
+class test_seq_02 extends test_seq;
+`uvm_object_utils(test_seq_02)
+function new(string name="");
+super.new(name);
+endfunction
+task body();
+`uvm_do_with(req,{req.sel==1;req.wr==1;req.addr==8'h23;req.data==8'h3;})
+endtask
+endclass

@@ -13,6 +13,7 @@ endfunction
 
 task run_phase(uvm_phase phase);
 seq_item_port.get_next_item(req);
+req.print();
 $cast(rsp, req.clone());
 rsp.set_id_info(req);
 @(posedge vif.clk);
