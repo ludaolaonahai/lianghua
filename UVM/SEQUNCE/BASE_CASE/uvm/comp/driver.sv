@@ -12,6 +12,43 @@ if(!uvm_config_db#(virtual itf)::get(this,"","vif",vif))
 endfunction
 
 task run_phase(uvm_phase phase);
+//test sequence method
+base_trans trans01,trans02;
+uvm_object trans03;
+bit content[];
+//meathod
+trans01 = base_trans::type_id::create("trans01");
+trans02 = base_trans::type_id::create("trans02");
+trans02.copy(trans01);
+
+$display("---copy meathod---");
+$display(trans02.get_type_name());
+$display(trans02.get_name());
+if(trans02.compare(trans01)) 
+	$display("match");
+else
+	$display("mismatch");
+trans03 = trans01.clone();
+$cast(trans02,trans03);
+$display("---clone meathod---");
+$display(trans02.get_type_name());
+$display(trans02.get_name());
+if(trans02.compare(trans01)) 
+	$display("match");
+else
+	$display("mismatch");
+trans02.sel = 1;
+if(trans02.compare(trans01)) 
+	$display("match");
+else
+	$display("mismatch");
+trans02.pack(content);
+$display(content);
+content[0] = 1;
+trans02.unpack(content);
+trans02.print();
+
+//real logic
 seq_item_port.get_next_item(req);
 req.print();
 $cast(rsp, req.clone());
